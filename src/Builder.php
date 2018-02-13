@@ -4,6 +4,7 @@ namespace Tarampampam\TemplatesBuilder;
 
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Command\Command;
+use Tarampampam\TemplatesBuilder\Commands\BuildCommand;
 use Tarampampam\TemplatesBuilder\Commands\TemplatesListCommand;
 use Tarampampam\TemplatesBuilder\Templates\TemplatesSet;
 
@@ -76,6 +77,7 @@ class Builder extends Application
     {
         return [
             TemplatesListCommand::class,
+            BuildCommand::class,
         ];
     }
 

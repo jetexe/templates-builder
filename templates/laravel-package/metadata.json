@@ -1,13 +1,26 @@
 {
     "description": "Package for laravel application",
+    "sources-dir": "src",
     "replaces": [
         {
             "signature": "{%org_name%}",
-            "description": "Organization name (your github name)"
+            "description": "New package ORGANIZATION name (or YOUR github name), like: \"symfony\" or \"illuminate\" (in lowercase and without spaces)",
+            "default": "tarampampam"
         },
         {
             "signature": "{%repo_name%}",
-            "description": "Repository name"
+            "description": "New package REPOSITORY name (in lowercase and without spaces too)",
+            "default": "my-laravel-package"
+        },
+        {
+            "signature": "{%root_namespace%}",
+            "description": "Root PSR-4 namespace (like your or organization name, but in CamelCase)",
+            "default": "TarampampamPackages"
+        },
+        {
+            "signature": "{%package_namespace%}",
+            "description": "Package PSR-4 namespace (like new package repository name, but in CamelCase)",
+            "default": "MyLaravelPackage"
         }
     ]
 }

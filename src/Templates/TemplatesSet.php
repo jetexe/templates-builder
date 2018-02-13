@@ -52,7 +52,7 @@ class TemplatesSet
      *
      * @return Template[]|array
      */
-    public function getTemplates()
+    public function all()
     {
         return $this->templates;
     }

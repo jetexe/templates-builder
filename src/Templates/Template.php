@@ -12,6 +12,11 @@ class Template
     const METADATA_FILENAME = 'metadata.json';
 
     /**
+     * Default template sources directory path.
+     */
+    const DEFAULT_SOURCE_DIR_PATH = 'src';
+
+    /**
      * Template name.
      *
      * @var string
@@ -41,6 +46,8 @@ class Template
      */
     public function __construct($template_path, $name = null)
     {
+        $template_path = realpath($template_path);
+
         if (! is_dir($template_path) || ! is_readable($template_path)) {
             throw new Exception(sprintf('Passed template path is not valid or unreadable: "%s"', $template_path));
         }
@@ -103,6 +110,30 @@ class Template
     }
 
     /**
+     * Get template directory path.
+     *
+     * @return string
+     */
+    public function getTemplatePath()
+    {
+        return $this->template_path;
+    }
+
+    /**
+     * Get template sources directory path.
+     *
+     * @return bool|string
+     */
+    public function getTemplateSourcesPath()
+    {
+        $sources_dir = empty($meta_sources = $this->getMetadata('sources-dir'))
+            ? $meta_sources
+            : static::DEFAULT_SOURCE_DIR_PATH;
+
+        return realpath($this->getTemplatePath() . DIRECTORY_SEPARATOR . $sources_dir);
+    }
+
+    /**
      * Get template description.
      *
      * @return string|null
@@ -110,5 +141,15 @@ class Template
     public function getDescription()
     {
         return $this->getMetadata('description');
+    }
+
+    /**
+     * Get template replaces rules\patterns.
+     *
+     * @return string|null
+     */
+    public function getReplaces()
+    {
+        return $this->getMetadata('replaces');
     }
 }

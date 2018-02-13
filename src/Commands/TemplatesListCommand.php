@@ -40,7 +40,7 @@ class TemplatesListCommand extends AbstractCommand
     {
         $templates = $this->getApplication()
             ->templates()
-            ->getTemplates();
+            ->all();
 
         if (! empty($templates)) {
             $output->writeln('<info>Available templates:</info>');
