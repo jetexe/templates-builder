@@ -1,0 +1,18 @@
+#!/usr/bin/env php
+<?php
+/* (c) Paramtamtam
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+// Builder constants
+define('TEMPLATES_BUILDER_BIN', __FILE__);
+
+require __DIR__.'/../vendor/autoload.php';
+
+$application = new \Tarampampam\TemplatesBuilder\Builder;
+
+$application->bootstrap();
+
+$application->run();

@@ -1,0 +1,16 @@
+# Environment deps.
+composer.lock
+
+# IDEs
+/nbproject
+/.idea
+
+# Vendors
+/vendor
+
+# Temp dirs & trash
+/temp
+/tmp
+/coverage
+.DS_Store
+.php_cs.cache

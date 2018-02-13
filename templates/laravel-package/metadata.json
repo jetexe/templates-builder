@@ -1,0 +1,13 @@
+{
+    "description": "Package for laravel application",
+    "replaces": [
+        {
+            "signature": "{%org_name%}",
+            "description": "Organization name (your github name)"
+        },
+        {
+            "signature": "{%repo_name%}",
+            "description": "Repository name"
+        }
+    ]
+}

@@ -1,1 +1,1 @@
-templates-builder
+projects-templates
