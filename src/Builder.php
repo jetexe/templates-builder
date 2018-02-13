@@ -4,12 +4,12 @@ namespace Tarampampam\TemplatesBuilder;
 
 use LogicException;
 use Symfony\Component\Console\Application;
-use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
+use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Tarampampam\TemplatesBuilder\Commands\BuildCommand;
-use Tarampampam\TemplatesBuilder\Commands\TemplatesListCommand;
 use Tarampampam\TemplatesBuilder\Templates\TemplatesSet;
+use Tarampampam\TemplatesBuilder\Commands\TemplatesListCommand;
 
 /**
  * Class Builder.
@@ -32,16 +32,6 @@ class Builder extends Application
      * @var TemplatesSet
      */
     protected $templates;
-
-    /**
-     * Get base application path.
-     *
-     * @return bool|string
-     */
-    public static function getBasePath()
-    {
-        return realpath(__DIR__ . '/../.');
-    }
 
     /**
      * Builder constructor.
@@ -71,6 +61,16 @@ class Builder extends Application
     }
 
     /**
+     * Get base application path.
+     *
+     * @return bool|string
+     */
+    public static function getBasePath()
+    {
+        return realpath(__DIR__ . '/../.');
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function doRun(InputInterface $input, OutputInterface $output)
@@ -93,9 +93,9 @@ class Builder extends Application
     /**
      * Get the templates set instance.
      *
-     * @return TemplatesSet
-     *
      * @throws LogicException
+     *
+     * @return TemplatesSet
      */
     public function templates()
     {
@@ -104,6 +104,18 @@ class Builder extends Application
         }
 
         return $this->templates;
+    }
+
+    /**
+     * Bootstrap the application.
+     *
+     * @return void
+     */
+    public function bootstrap()
+    {
+        foreach ($this->getCommandsClasses() as $commands_class) {
+            $this->add(new $commands_class);
+        }
     }
 
     /**
@@ -117,17 +129,5 @@ class Builder extends Application
             TemplatesListCommand::class,
             BuildCommand::class,
         ];
-    }
-
-    /**
-     * Bootstrap the application.
-     *
-     * @return void
-     */
-    public function bootstrap()
-    {
-        foreach ($this->getCommandsClasses() as $commands_class) {
-            $this->add(new $commands_class);
-        }
     }
 }

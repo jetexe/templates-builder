@@ -63,26 +63,6 @@ class Template
     }
 
     /**
-     * Make template metadata initialization.
-     *
-     * @throws Exception
-     */
-    protected function initMetadata()
-    {
-        if (! is_file($meta = $this->template_path . '/' . static::METADATA_FILENAME) || ! is_readable($meta)) {
-            throw new Exception(
-                sprintf(
-                    'Metadata file "%s" not exists or unreadable in directory "%s"',
-                    $meta,
-                    $this->template_path
-                )
-            );
-        }
-
-        $this->metadata = json_decode(file_get_contents($meta), true);
-    }
-
-    /**
      * Get template metadata content as an array (optional you can pass any root section name).
      *
      * @param string|null $section_name
@@ -152,5 +132,25 @@ class Template
     public function getReplaces()
     {
         return $this->getMetadata('replaces');
+    }
+
+    /**
+     * Make template metadata initialization.
+     *
+     * @throws Exception
+     */
+    protected function initMetadata()
+    {
+        if (! is_file($meta = $this->template_path . '/' . static::METADATA_FILENAME) || ! is_readable($meta)) {
+            throw new Exception(
+                sprintf(
+                    'Metadata file "%s" not exists or unreadable in directory "%s"',
+                    $meta,
+                    $this->template_path
+                )
+            );
+        }
+
+        $this->metadata = json_decode(file_get_contents($meta), true);
     }
 }

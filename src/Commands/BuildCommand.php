@@ -3,15 +3,15 @@
 namespace Tarampampam\TemplatesBuilder\Commands;
 
 use Exception;
-use RecursiveDirectoryIterator;
-use RecursiveIteratorIterator;
 use SplFileInfo;
+use RecursiveIteratorIterator;
+use RecursiveDirectoryIterator;
+use Symfony\Component\Console\Question\Question;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
+use Tarampampam\TemplatesBuilder\Templates\Template;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\ConfirmationQuestion;
-use Symfony\Component\Console\Question\Question;
-use Tarampampam\TemplatesBuilder\Templates\Template;
 
 /**
  * Class BuildCommand.
@@ -59,9 +59,9 @@ class BuildCommand extends AbstractCommand
      * @param InputInterface  $input
      * @param OutputInterface $output
      *
-     * @return int|null
-     *
      * @throws Exception
+     *
+     * @return int|null
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
@@ -93,9 +93,9 @@ class BuildCommand extends AbstractCommand
      * @param InputInterface  $input
      * @param OutputInterface $output
      *
-     * @return bool
-     *
      * @throws Exception
+     *
+     * @return bool
      */
     protected function makeTemplateCopy(Template $template,
                                         $target_path,
@@ -144,13 +144,13 @@ class BuildCommand extends AbstractCommand
      * Make template replaces with patterns, declared in metadata file.
      *
      * @param Template        $template
-     * @param  string         $target_path
+     * @param string          $target_path
      * @param InputInterface  $input
      * @param OutputInterface $output
      *
-     * @return bool
-     *
      * @throws Exception
+     *
+     * @return bool
      */
     protected function makeTemplateReplaces(Template $template,
                                             $target_path,
@@ -239,7 +239,7 @@ class BuildCommand extends AbstractCommand
             /** @var SplFileInfo $file */
             if (! $file->isDir()) {
                 foreach ((array) $excludes as $exclude) {
-                    if (strpos($file->getPathname(), $exclude) !== false) {
+                    if (mb_strpos($file->getPathname(), $exclude) !== false) {
                         continue 2;
                     }
                 }
