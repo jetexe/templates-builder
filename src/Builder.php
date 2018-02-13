@@ -2,13 +2,13 @@
 
 namespace Tarampampam\TemplatesBuilder;
 
+use Tarampampam\TemplatesBuilder\Templates\TemplatesSet;
 use LogicException;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Tarampampam\TemplatesBuilder\Commands\BuildCommand;
-use Tarampampam\TemplatesBuilder\Templates\TemplatesSet;
 use Tarampampam\TemplatesBuilder\Commands\TemplatesListCommand;
 
 /**
