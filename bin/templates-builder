@@ -9,7 +9,37 @@
 // Builder constants
 define('TEMPLATES_BUILDER_BIN', __FILE__);
 
-require __DIR__ . '/../vendor/autoload.php';
+// Check for php7
+if (! defined('PHP_MAJOR_VERSION') || PHP_MAJOR_VERSION < 7) {
+    die(
+        'Upgrade to php7' . PHP_EOL .
+        'This application supports only php7 and above.' . PHP_EOL
+    );
+}
+
+$autoloads = [
+    __DIR__ . '/vendor/autoload.php',
+    __DIR__ . '/../vendor/autoload.php',
+    __DIR__ . '/../../../autoload.php',
+];
+
+$loaded = false;
+
+foreach ($autoloads as $autoload_file) {
+    if (file_exists($autoload_file)) {
+        require $autoload_file;
+        $loaded = true;
+        break;
+    }
+}
+
+if (! $loaded) {
+    die(
+        'You need to set up the project dependencies using the following commands:' . PHP_EOL .
+        'wget http://getcomposer.org/composer.phar' . PHP_EOL .
+        'php composer.phar install' . PHP_EOL
+    );
+}
 
 $application = new \Tarampampam\TemplatesBuilder\Builder;
 
