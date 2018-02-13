@@ -1,5 +1,5 @@
 <p align="center">
-  <img alt="logo" src="https://i.imgur.com/jnfieJ6.png" width="140" />
+  <img alt="logo" src="https://hsto.org/webt/0v/qb/0p/0vqb0pp6ntyyd8mbdkkj0wsllwo.png" width="70" height="70" />
 </p>
 
 # {% Короткое описание пакета %}
@@ -20,7 +20,7 @@
 Для установки данного пакета выполните в терминале следующую команду:
 
 ```shell
-$ composer require {%org_name%}/{%repo_name%} "1.*"
+$ composer require {%org_name%}/{%repo_name%} "^1.0"
 ```
 
 > Для этого необходим установленный `composer`. Для его установки перейдите по [данной ссылке][getcomposer].

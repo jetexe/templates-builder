@@ -1,5 +1,5 @@
 <p align="center">
-  <img alt="logo" src="https://habrastorage.org/webt/0v/qb/0p/0vqb0pp6ntyyd8mbdkkj0wsllwo.png" width="70" height="70" />
+  <img alt="logo" src="https://hsto.org/webt/0v/qb/0p/0vqb0pp6ntyyd8mbdkkj0wsllwo.png" width="70" height="70" />
 </p>
 
 # Projects templates builder
@@ -30,27 +30,106 @@ $ composer global require tarampampam/templates-builder "^1.0"
 > $ composer global update tarampampam/templates-builder
 > ```
 
-### Подключение собственных шаблонов
+### Создание директории для собственных шаблонов
 
-После установки рекомендуется создать директорию для ваших собственных шаблонов и алиас вызова bin-файла данного пакета.
-
-Создание директории для собственных шаблонов:
+После установки рекомендуется создать директорию для ваших собственных шаблонов:
 
 ```shell
-$ mkdir $HOME/.php-builder-templates
+$ mkdir "$HOME/.php-builder-templates"
 ```
 
-Создание алиаса с помощью "однострочника":
+### Создание алиаса вызова
+
+Вы можете создать алиас с помощью следующего "однострочника":
 
 ```shell
-$ BUILDER_BIN="$HOME/.composer/vendor/tarampampam/templates-builder/bin/templates-builder"; if [ -x "$BUILDER_BIN" ]; then echo -e "function templates-builder() {\n  $BUILDER_BIN --templates-dir=\"\$HOME/.php-builder-templates\" \"\$@\"\n}" >> "$HOME/.bash_aliases"; else echo "Error"; exit 1; fi;
+$ BUILDER_BIN="$HOME/.composer/vendor/bin/templates-builder"; if [ -x "$BUILDER_BIN" ]; then echo -e "function templates-builder() {\n  $BUILDER_BIN --templates-dir=\"\$HOME/.php-builder-templates\" \"\$@\"\n}" >> "$HOME/.bash_aliases"; else echo "Error"; exit 1; fi;
 ```
 
-> Данная команда создаст в файле `~/.bash_aliases` bash-функцию `templates-builder`, которая позволит вам находясь в любой директории вызывать bin-файл данного пакета с указанием использования директории для собственных шаблонов.
+> Данная команда создаст в файле `~/.bash_aliases` bash-функцию `templates-builder`, которая позволит вам находясь в любой директории вызывать bin-файл данного пакета без необходимости "ручного" указания использования директории для собственных шаблонов.
 >
 > Так же стоит помнить, что как в различных дистрибутивах linux, так и при использовании различных shell-ов метод регистрации алиасов может разниться.
 
+После этого вы можете проверить работоспособность алиаса выполнением в терминале:
+
+```shell
+$ templates-builder
+```
+
 ## Использование
+
+Исполняемый (bin) файл данного пакета поддерживает следующие команды:
+
+Команда | Описание
+------- | --------
+`templates` | Выводит список всех доступных шаблонов
+`build` | Производит "установку" выбранного шаблона по указанному пути
+
+Более подробно о каждой команде и параметрах её вызова вы можете узнать, выполнив её с опцией `--help`, например:
+
+```shell
+$ templates-builder templates --help
+# или
+$ ~/.composer/vendor/bin/templates-builder build --help
+# или
+$ templates-builder b --help
+```
+
+При выполнении "установки" шаблона в указанной директории - если шаблон поддерживает динамическую замену регулярных вхождений - о каждой замене пользовалелю будет задан интерактивный запрос.
+
+## Создание собственных шаблонов
+
+Шаблон - это директория (имя которой является именем шаблона), содержащая специальный файл `metadata.json` (далее по тексту - мета-файл), который описывает шаблон, и исходный код самого шаблона.
+
+Файловая структура его может быть следующая:
+
+```
+$HOME
+└── .php-builder-templates
+    └── example-template
+        ├── metadata.json
+        └── src
+            ├── script.sh
+            └── README.md
+```
+
+ * `example-template` - имя шаблона;
+ * `metadata.json` - его мета-файл;
+ * `src` - директория с файлами шаблона;
+ 
+Структура мета-файла должна иметь следующий вид:
+ 
+```json
+{
+    "description": "Example template",
+    "sources-dir": "src",
+    "replaces": [
+        {
+            "signature": "{%custom_value_1%}",
+            "description": "Custom value 1 description"
+        },
+        {
+            "signature": "{%custom_value_2%}",
+            "description": "Custom value 2 description",
+            "default": "Default value 2"
+        }
+    ]
+}
+``` 
+
+Имя поля мета-файла | Описание
+------------------- | --------
+`description` | Краткое описание шаблона
+`sources-dir` | Относительный путь к директории к файлам шаблона (по умолчанию `src`)
+`replaces` | Правила замен регулярных вхождений (регулярные выражения **не** поддерживаются) шаблона в формате, описанном в примере выше
+
+Создав подобный шаблон в директории `$HOME/.php-builder-templates` вы сможете его "разворачивать" при помощи данного приложения командой:
+
+```shell
+$ ~/.composer/vendor/bin/templates-builder b /path/to/target example-template
+# или
+$ templates-builder build /path/to/target example-template
+```
 
 ### Тестирование
 
@@ -66,6 +145,8 @@ $ composer test
 ## Поддержка и развитие
 
 Если у вас возникли какие-либо проблемы по работе с данным пакетом, пожалуйста, создайте соответствующий `issue` в данном репозитории.
+
+При необходимости добавления какого-либо шаблона - тоже.
 
 Если вы способны самостоятельно реализовать тот функционал, что вам необходим - создайте PR с соответствующими изменениями. Крайне желательно сопровождать PR соответствующими тестами, фиксирующими работу ваших изменений. После проверки и принятия изменений будет опубликована новая минорная версия.
 

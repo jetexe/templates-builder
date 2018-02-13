@@ -21,6 +21,11 @@
             "signature": "{%package_namespace%}",
             "description": "Package PSR-4 namespace (like new package repository name, but in CamelCase)",
             "default": "MyLaravelPackage"
+        },
+        {
+            "signature": "{%styleci_id%}",
+            "description": "Style-CI.io project ID",
+            "default": "none"
         }
     ]
 }
