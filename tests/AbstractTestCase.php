@@ -1,6 +1,6 @@
 <?php
 
-namespace {%root_namespace%}\{%package_namespace%}\Tests;
+namespace Tarampampam\TemplatesBuilder\Tests;
 
 use PHPUnit\Framework\TestCase;
 use PHPUnit\Framework\AssertionFailedError;

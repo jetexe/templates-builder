@@ -12,11 +12,11 @@ use Exception;
 class TemplatesSet
 {
     /**
-     * Base templates directory path.
+     * Templates directories paths.
      *
      * @var string
      */
-    protected $base_path;
+    protected $templates_paths;
 
     /**
      * @var Template[]|array
@@ -26,23 +26,24 @@ class TemplatesSet
     /**
      * Templates constructor.
      *
-     * @param string $base_path
+     * @param string[] $templates_paths
      *
      * @throws Exception
      */
-    public function __construct($base_path)
+    public function __construct($templates_paths)
     {
-        if (! is_dir($base_path) || ! is_readable($base_path)) {
-            throw new Exception(sprintf('Passed base path is not valid or unreadable: %s', $base_path));
-        }
+        $this->templates_paths = array_filter((array) $templates_paths);
 
-        $this->base_path = $base_path;
+        foreach ($this->templates_paths as $template_path) {
+            if (is_dir($template_path) && is_readable($template_path)) {
+                foreach (glob($template_path . DIRECTORY_SEPARATOR . '*', GLOB_ONLYDIR) as $directory_path) {
+                    $template = new Template($directory_path);
 
-        foreach (glob($this->base_path . '/*', GLOB_ONLYDIR) as $directory_path) {
-            $template = new Template($directory_path);
-
-            if (! empty($template->getMetadata('description'))) {
-                array_push($this->templates, $template);
+                    // Make simple template validation
+                    if (is_dir($template->getTemplateSourcesPath())) {
+                        array_push($this->templates, $template);
+                    }
+                }
             }
         }
     }

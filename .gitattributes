@@ -1,8 +1,8 @@
 * text=auto
 
 /.github export-ignore
+/templates/example export-ignore
 /tests export-ignore
-/README.md export-ignore
 /CONTRIBUTING.md export-ignore
 /phpunit.xml export-ignore
 .editorconfig export-ignore

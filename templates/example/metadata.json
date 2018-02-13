@@ -1,0 +1,16 @@
+{
+    "description": "Example template",
+    "sources-dir": "sources",
+    "replaces": [
+        {
+            "signature": "{%custom_value_1%}",
+            "description": "Custom value 1 description",
+            "default": "Default value 1"
+        },
+        {
+            "signature": "{%custom_value_2%}",
+            "description": "Custom value 2 description",
+            "default": "Default value 2"
+        }
+    ]
+}

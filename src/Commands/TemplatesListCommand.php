@@ -47,10 +47,16 @@ class TemplatesListCommand extends AbstractCommand
 
             foreach ($templates as $template) {
                 $output->writeln(sprintf(
-                    '  %s - <comment>%s</comment>',
+                    '  <info>%s</info> - <comment>%s</comment>',
                     $template->getName(),
-                    $template->getDescription()
+                    empty($description = $template->getDescription())
+                        ? 'Template description not found'
+                        : $description
                 ));
+
+                $output->writeln(sprintf(
+                    '    Location: <comment>%s</comment>', $template->getTemplatePath()
+                ), OutputInterface::VERBOSITY_VERBOSE);
             }
         } else {
             $output->writeln('<error>No one template were found</error>');

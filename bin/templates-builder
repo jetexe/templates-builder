@@ -9,7 +9,7 @@
 // Builder constants
 define('TEMPLATES_BUILDER_BIN', __FILE__);
 
-require __DIR__.'/../vendor/autoload.php';
+require __DIR__ . '/../vendor/autoload.php';
 
 $application = new \Tarampampam\TemplatesBuilder\Builder;
 

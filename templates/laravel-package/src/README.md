@@ -1,8 +1,3 @@
-> Быстрая установка шаблона данного репзитория в **текущей директории** *(с помощью терминала)*:
-> ```shell
-> $ bash <(curl -L -s https://goo.gl/A1m1gF)
-> ```
-
 <p align="center">
   <img alt="logo" src="https://i.imgur.com/jnfieJ6.png" width="140" />
 </p>

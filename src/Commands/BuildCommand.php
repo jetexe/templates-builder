@@ -71,7 +71,8 @@ class BuildCommand extends AbstractCommand
 
         foreach ($templates as $template) {
             if ($template->getName() === $passed_template_name) {
-                return $this->makeTemplateBuilding($template, $passed_path, $input, $output);
+                return $this->makeTemplateCopy($template, $passed_path, $input, $output)
+                    && $this->makeTemplateReplaces($template, $passed_path, $input, $output);
             }
         }
 
@@ -92,14 +93,14 @@ class BuildCommand extends AbstractCommand
      * @param InputInterface  $input
      * @param OutputInterface $output
      *
-     * @return int|void
+     * @return bool
      *
      * @throws Exception
      */
-    protected function makeTemplateBuilding(Template $template,
-                                            $target_path,
-                                            InputInterface $input,
-                                            OutputInterface $output)
+    protected function makeTemplateCopy(Template $template,
+                                        $target_path,
+                                        InputInterface $input,
+                                        OutputInterface $output)
     {
         $template_sources = $template->getTemplateSourcesPath();
 
@@ -124,7 +125,7 @@ class BuildCommand extends AbstractCommand
             if (! $this->question_helper->ask($input, $output, $question)) {
                 $output->writeln('<error>Operation cancelled</error>');
 
-                return;
+                return false;
             }
         }
 
@@ -136,6 +137,26 @@ class BuildCommand extends AbstractCommand
         ));
         $this->filesystem->mirror($template_sources, $target_path, null, ['override' => true]);
 
+        return true;
+    }
+
+    /**
+     * Make template replaces with patterns, declared in metadata file.
+     *
+     * @param Template        $template
+     * @param  string         $target_path
+     * @param InputInterface  $input
+     * @param OutputInterface $output
+     *
+     * @return bool
+     *
+     * @throws Exception
+     */
+    protected function makeTemplateReplaces(Template $template,
+                                            $target_path,
+                                            InputInterface $input,
+                                            OutputInterface $output)
+    {
         // Make template replaces
         if (! empty($template_replaces = $template->getReplaces())) {
             $output->writeln("\nThis template supports and requires next patterns replaces:");
@@ -194,6 +215,8 @@ class BuildCommand extends AbstractCommand
                 }
             }
         }
+
+        return true;
     }
 
     /**

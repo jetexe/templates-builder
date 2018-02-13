@@ -40,13 +40,14 @@ class Template
     /**
      * Template constructor.
      *
-     * @param string $name
+     * @param string      $template_path
+     * @param string|null $name
      *
      * @throws Exception
      */
     public function __construct($template_path, $name = null)
     {
-        $template_path = realpath($template_path);
+        $template_path = rtrim($template_path, '\\/');
 
         if (! is_dir($template_path) || ! is_readable($template_path)) {
             throw new Exception(sprintf('Passed template path is not valid or unreadable: "%s"', $template_path));
@@ -126,11 +127,11 @@ class Template
      */
     public function getTemplateSourcesPath()
     {
-        $sources_dir = empty($meta_sources = $this->getMetadata('sources-dir'))
+        $sources_dir = ! empty($meta_sources = $this->getMetadata('sources-dir'))
             ? $meta_sources
             : static::DEFAULT_SOURCE_DIR_PATH;
 
-        return realpath($this->getTemplatePath() . DIRECTORY_SEPARATOR . $sources_dir);
+        return $this->getTemplatePath() . DIRECTORY_SEPARATOR . $sources_dir;
     }
 
     /**

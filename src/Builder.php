@@ -2,14 +2,19 @@
 
 namespace Tarampampam\TemplatesBuilder;
 
+use LogicException;
 use Symfony\Component\Console\Application;
-use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
+use Symfony\Component\Console\Output\OutputInterface;
 use Tarampampam\TemplatesBuilder\Commands\BuildCommand;
 use Tarampampam\TemplatesBuilder\Commands\TemplatesListCommand;
 use Tarampampam\TemplatesBuilder\Templates\TemplatesSet;
 
 /**
  * Class Builder.
+ *
+ * Application instance.
  */
 class Builder extends Application
 {
@@ -55,16 +60,49 @@ class Builder extends Application
                 : $version
         );
 
-        $this->templates = new TemplatesSet(static::getBasePath() . '/templates');
+        $this->getDefinition()->addOption(
+            new InputOption(
+                '--templates-dir',
+                '-t',
+                InputOption::VALUE_OPTIONAL,
+                'Load additional templates from this directory'
+            )
+        );
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function doRun(InputInterface $input, OutputInterface $output)
+    {
+        $user_defined_templates_path = null;
+
+        if ($input->hasParameterOption($templates_dir_option_name = '--templates-dir', true)) {
+            $user_defined_templates_path = $input->getParameterOption($templates_dir_option_name);
+        }
+
+        // Make templates set initialization
+        $this->templates = new TemplatesSet([
+            static::getBasePath() . '/templates',
+            $user_defined_templates_path,
+        ]);
+
+        parent::doRun($input, $output);
     }
 
     /**
      * Get the templates set instance.
      *
      * @return TemplatesSet
+     *
+     * @throws LogicException
      */
     public function templates()
     {
+        if (! ($this->templates instanceof TemplatesSet)) {
+            throw new LogicException('Templates set is not initialized');
+        }
+
         return $this->templates;
     }
 
@@ -89,8 +127,7 @@ class Builder extends Application
     public function bootstrap()
     {
         foreach ($this->getCommandsClasses() as $commands_class) {
-            /** @var Command $command */
-            $this->add($command = new $commands_class);
+            $this->add(new $commands_class);
         }
     }
 }
