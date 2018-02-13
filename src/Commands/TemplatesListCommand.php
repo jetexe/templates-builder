@@ -15,7 +15,7 @@ class TemplatesListCommand extends AbstractCommand
     /**
      * {@inheritdoc}
      */
-    protected function getCommandName()
+    protected function getCommandName(): string
     {
         return 'templates';
     }
@@ -23,7 +23,7 @@ class TemplatesListCommand extends AbstractCommand
     /**
      * {@inheritdoc}
      */
-    protected function getCommandDescription()
+    protected function getCommandDescription(): string
     {
         return 'List all available templates';
     }
@@ -34,7 +34,7 @@ class TemplatesListCommand extends AbstractCommand
      * @param InputInterface  $input
      * @param OutputInterface $output
      *
-     * @return int|null|void
+     * @return int|void|null
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {

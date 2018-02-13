@@ -29,7 +29,7 @@ class BuildCommand extends AbstractCommand
     /**
      * {@inheritdoc}
      */
-    protected function getCommandName()
+    protected function getCommandName(): string
     {
         return 'build';
     }
@@ -37,7 +37,7 @@ class BuildCommand extends AbstractCommand
     /**
      * {@inheritdoc}
      */
-    protected function getCommandDescription()
+    protected function getCommandDescription(): string
     {
         return 'Build template, based on supported template';
     }
@@ -45,7 +45,7 @@ class BuildCommand extends AbstractCommand
     /**
      * {@inheritdoc}
      */
-    protected function configure()
+    protected function configure(): void
     {
         parent::configure();
 
@@ -105,12 +105,11 @@ class BuildCommand extends AbstractCommand
                 $passed_template_name,
                 implode(', ', $templates_names)
             ));
-        } else {
-            $output->writeln(
+        }
+        $output->writeln(
                 sprintf('<comment>Template name: %s</comment>', $passed_template_name),
                 OutputInterface::VERBOSITY_VERBOSE
             );
-        }
 
         foreach ($templates as $template) {
             if ($template->getName() === $passed_template_name) {
@@ -262,7 +261,7 @@ class BuildCommand extends AbstractCommand
      * @param string $target_directory_path
      * @param null   $excludes
      *
-     * @return string[]|array
+     * @return array|string[]
      */
     protected function getFilesNamesRecursively($target_directory_path, $excludes = null)
     {

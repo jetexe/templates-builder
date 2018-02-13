@@ -17,7 +17,7 @@ class BasicExecutionTest extends AbstractTestCase
     /**
      * {@inheritdoc}
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -28,7 +28,7 @@ class BasicExecutionTest extends AbstractTestCase
     /**
      * {@inheritdoc}
      */
-    protected function tearDown()
+    protected function tearDown(): void
     {
         unset($this->application);
 
@@ -40,7 +40,7 @@ class BasicExecutionTest extends AbstractTestCase
      *
      * @return void
      */
-    public function testConstructor()
+    public function testConstructor(): void
     {
         $this->assertEquals('Templates builder', $this->application->getName());
         $this->assertEquals('1.0.0', $this->application->getVersion());

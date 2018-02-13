@@ -48,19 +48,19 @@ abstract class AbstractCommand extends Command
      *
      * @return string
      */
-    abstract protected function getCommandName();
+    abstract protected function getCommandName(): string;
 
     /**
      * Returns command description.
      *
      * @return string
      */
-    abstract protected function getCommandDescription();
+    abstract protected function getCommandDescription(): string;
 
     /**
      * {@inheritdoc}
      */
-    protected function configure()
+    protected function configure(): void
     {
         $this
             ->setName($this->getCommandName())

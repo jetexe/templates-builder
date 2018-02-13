@@ -67,7 +67,7 @@ class Template
      *
      * @return string
      */
-    public function __toString()
+    public function __toString(): string
     {
         return $this->getName();
     }
@@ -77,7 +77,7 @@ class Template
      *
      * @param string|null $section_name
      *
-     * @return array|null|mixed
+     * @return array|mixed|null
      */
     public function getMetadata($section_name = null)
     {
@@ -95,9 +95,9 @@ class Template
      *
      * @return string
      */
-    public function getName()
+    public function getName(): string
     {
-        return $this->name;
+        return (string) $this->name;
     }
 
     /**
@@ -105,7 +105,7 @@ class Template
      *
      * @return string
      */
-    public function getTemplatePath()
+    public function getTemplatePath(): string
     {
         return $this->template_path;
     }
@@ -137,7 +137,7 @@ class Template
     /**
      * Get template replaces rules\patterns.
      *
-     * @return string|null
+     * @return array[]|null
      */
     public function getReplaces()
     {
@@ -149,7 +149,7 @@ class Template
      *
      * @throws Exception
      */
-    protected function initMetadata()
+    protected function initMetadata(): void
     {
         if (! is_file($meta = $this->template_path . '/' . static::METADATA_FILENAME) || ! is_readable($meta)) {
             throw new Exception(

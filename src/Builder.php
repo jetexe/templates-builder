@@ -36,8 +36,8 @@ class Builder extends Application
     /**
      * Builder constructor.
      *
-     * @param null|string $name
-     * @param null|string $version
+     * @param string|null $name
+     * @param string|null $version
      */
     public function __construct($name = null, $version = null)
     {
@@ -73,7 +73,7 @@ class Builder extends Application
     /**
      * {@inheritdoc}
      */
-    public function doRun(InputInterface $input, OutputInterface $output)
+    public function doRun(InputInterface $input, OutputInterface $output): void
     {
         $user_defined_templates_path = null;
 
@@ -97,7 +97,7 @@ class Builder extends Application
      *
      * @return TemplatesSet
      */
-    public function templates()
+    public function templates(): TemplatesSet
     {
         if (! ($this->templates instanceof TemplatesSet)) {
             throw new LogicException('Templates set is not initialized');
@@ -111,7 +111,7 @@ class Builder extends Application
      *
      * @return void
      */
-    public function bootstrap()
+    public function bootstrap(): void
     {
         foreach ($this->getCommandsClasses() as $commands_class) {
             $this->add(new $commands_class);
@@ -123,7 +123,7 @@ class Builder extends Application
      *
      * @return string[]
      */
-    protected function getCommandsClasses()
+    protected function getCommandsClasses(): array
     {
         return [
             TemplatesListCommand::class,

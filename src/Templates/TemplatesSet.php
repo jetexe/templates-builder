@@ -19,7 +19,7 @@ class TemplatesSet
     protected $templates_paths;
 
     /**
-     * @var Template[]|array
+     * @var array|Template[]
      */
     protected $templates = [];
 
@@ -55,9 +55,9 @@ class TemplatesSet
     /**
      * Get founded templates stack.
      *
-     * @return Template[]|array
+     * @return array|Template[]
      */
-    public function all()
+    public function all(): array
     {
         return $this->templates;
     }
