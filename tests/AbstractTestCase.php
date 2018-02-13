@@ -17,7 +17,7 @@ abstract class AbstractTestCase extends TestCase
      *
      * @throws AssertionFailedError
      */
-    public function assertIsArray($value): void
+    public function assertIsArray($value)
     {
         $this->assertTrue(is_array($value), 'Must be an array');
     }
@@ -29,7 +29,7 @@ abstract class AbstractTestCase extends TestCase
      *
      * @throws AssertionFailedError
      */
-    public function assertIsNotEmptyString($value): void
+    public function assertIsNotEmptyString($value)
     {
         $this->assertIsString($value);
         $this->assertNotEmpty($value);
@@ -42,7 +42,7 @@ abstract class AbstractTestCase extends TestCase
      *
      * @throws AssertionFailedError
      */
-    public function assertIsString($value): void
+    public function assertIsString($value)
     {
         $this->assertTrue(is_string($value), 'Must be string');
     }

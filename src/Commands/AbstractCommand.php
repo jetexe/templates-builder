@@ -60,7 +60,7 @@ abstract class AbstractCommand extends Command
     /**
      * {@inheritdoc}
      */
-    protected function configure(): void
+    protected function configure()
     {
         $this
             ->setName($this->getCommandName())

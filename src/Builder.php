@@ -73,7 +73,7 @@ class Builder extends Application
     /**
      * {@inheritdoc}
      */
-    public function doRun(InputInterface $input, OutputInterface $output): void
+    public function doRun(InputInterface $input, OutputInterface $output)
     {
         $user_defined_templates_path = null;
 
@@ -111,7 +111,7 @@ class Builder extends Application
      *
      * @return void
      */
-    public function bootstrap(): void
+    public function bootstrap()
     {
         foreach ($this->getCommandsClasses() as $commands_class) {
             $this->add(new $commands_class);

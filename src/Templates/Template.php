@@ -149,7 +149,7 @@ class Template
      *
      * @throws Exception
      */
-    protected function initMetadata(): void
+    protected function initMetadata()
     {
         if (! is_file($meta = $this->template_path . '/' . static::METADATA_FILENAME) || ! is_readable($meta)) {
             throw new Exception(

@@ -45,7 +45,7 @@ class BuildCommand extends AbstractCommand
     /**
      * {@inheritdoc}
      */
-    protected function configure(): void
+    protected function configure()
     {
         parent::configure();
 
