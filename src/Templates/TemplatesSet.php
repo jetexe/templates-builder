@@ -46,6 +46,10 @@ class TemplatesSet
                 }
             }
         }
+
+        if (! empty($this->templates)) {
+            $this->templates = array_unique(array_reverse($this->templates), SORT_STRING);
+        }
     }
 
     /**

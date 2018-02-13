@@ -153,4 +153,14 @@ class Template
 
         $this->metadata = json_decode(file_get_contents($meta), true);
     }
+
+    /**
+     * Convert template into string.
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->getName();
+    }
 }
