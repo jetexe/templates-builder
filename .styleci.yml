@@ -23,5 +23,5 @@ disabled:
   - concat_without_spaces
 
 finder:
-  exclude:
+  not-path:
     - "templates"
