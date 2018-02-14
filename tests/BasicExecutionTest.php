@@ -21,8 +21,7 @@ class BasicExecutionTest extends AbstractTestCase
     {
         parent::setUp();
 
-        $this->application = new Builder;
-        $this->application->bootstrap();
+        $this->application = $this->applicationFactory();
     }
 
     /**
@@ -43,7 +42,7 @@ class BasicExecutionTest extends AbstractTestCase
     public function testConstructor()
     {
         $this->assertEquals('Templates builder', $this->application->getName());
-        $this->assertEquals('1.0.0', $this->application->getVersion());
+        $this->assertEquals('1.0.3', $this->application->getVersion());
 
         foreach (['templates', 'build'] as $commands_names) {
             $this->assertArrayHasKey($commands_names, $this->application->all());

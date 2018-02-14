@@ -3,7 +3,7 @@
 namespace Tarampampam\TemplatesBuilder\Tests;
 
 use PHPUnit\Framework\TestCase;
-use PHPUnit\Framework\AssertionFailedError;
+use Tarampampam\TemplatesBuilder\Tests\Mocks\BuilderMock;
 
 /**
  * Class AbstractTestCase.
@@ -11,39 +11,17 @@ use PHPUnit\Framework\AssertionFailedError;
 abstract class AbstractTestCase extends TestCase
 {
     /**
-     * Проверяет, что элемент является массивом.
+     * Application instance factory.
      *
-     * @param $value
+     * @param array ...$arguments
      *
-     * @throws AssertionFailedError
+     * @return BuilderMock
      */
-    public function assertIsArray($value)
+    protected function applicationFactory(...$arguments): BuilderMock
     {
-        $this->assertTrue(is_array($value), 'Must be an array');
-    }
+        $instance = new BuilderMock(...$arguments);
+        $instance->bootstrap();
 
-    /**
-     * Проверяет, что элемент является не пустой строкой.
-     *
-     * @param $value
-     *
-     * @throws AssertionFailedError
-     */
-    public function assertIsNotEmptyString($value)
-    {
-        $this->assertIsString($value);
-        $this->assertNotEmpty($value);
-    }
-
-    /**
-     * Проверяет, что элемент является строкой.
-     *
-     * @param $value
-     *
-     * @throws AssertionFailedError
-     */
-    public function assertIsString($value)
-    {
-        $this->assertTrue(is_string($value), 'Must be string');
+        return $instance;
     }
 }

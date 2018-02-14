@@ -26,7 +26,7 @@ class Builder extends Application
     /**
      * Application version.
      */
-    const APP_VERSION = '1.0.0';
+    const APP_VERSION = '1.0.3';
 
     /**
      * @var TemplatesSet
@@ -71,6 +71,16 @@ class Builder extends Application
     }
 
     /**
+     * Get own templates directories path.
+     *
+     * @return string
+     */
+    public static function getOwnTemplatesPath()
+    {
+        return static::getBasePath() . '/templates';
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function doRun(InputInterface $input, OutputInterface $output)
@@ -83,7 +93,7 @@ class Builder extends Application
 
         // Make templates set initialization
         $this->templates = new TemplatesSet([
-            static::getBasePath() . '/templates',
+            static::getOwnTemplatesPath(),
             $user_defined_templates_path,
         ]);
 
