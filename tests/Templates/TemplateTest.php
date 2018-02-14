@@ -36,39 +36,6 @@ class TemplateTest extends AbstractTestCase
     }
 
     /**
-     * Template instance factory.
-     *
-     * @param array ...$arguments
-     *
-     * @return Template
-     */
-    protected function instanceFactory(...$arguments): Template
-    {
-        return new Template(...$arguments);
-    }
-
-    /**
-     * Get stub template directory path.
-     *
-     * @return string
-     */
-    protected function getStubTemplatePath()
-    {
-        return __DIR__ . '/../stubs/templates/stub-template';
-    }
-
-
-    /**
-     * Get invalid stub template directory path.
-     *
-     * @return string
-     */
-    protected function getInvalidStubTemplatePath()
-    {
-        return __DIR__ . '/../stubs/templates/invalid-stub-template';
-    }
-
-    /**
      * Constructor and some another methods tests.
      *
      * @return void
@@ -168,5 +135,37 @@ class TemplateTest extends AbstractTestCase
     {
         $this->assertEquals($this->getStubTemplatePath(), $this->instance->getTemplatePath());
         $this->assertEquals($this->getStubTemplatePath() . '/sources', $this->instance->getTemplateSourcesPath());
+    }
+
+    /**
+     * Template instance factory.
+     *
+     * @param array ...$arguments
+     *
+     * @return Template
+     */
+    protected function instanceFactory(...$arguments): Template
+    {
+        return new Template(...$arguments);
+    }
+
+    /**
+     * Get stub template directory path.
+     *
+     * @return string
+     */
+    protected function getStubTemplatePath()
+    {
+        return __DIR__ . '/../stubs/templates/stub-template';
+    }
+
+    /**
+     * Get invalid stub template directory path.
+     *
+     * @return string
+     */
+    protected function getInvalidStubTemplatePath()
+    {
+        return __DIR__ . '/../stubs/templates/invalid-stub-template';
     }
 }

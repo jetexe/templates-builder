@@ -37,6 +37,20 @@ class TemplateSetTest extends AbstractTestCase
     }
 
     /**
+     * Test 'all()' method.
+     *
+     * @return void
+     */
+    public function testAllMethod()
+    {
+        $this->assertNotEmpty($all = $this->instance->all());
+
+        foreach ($all = $this->instance->all() as $template) {
+            $this->assertInstanceOf(Template::class, $template);
+        }
+    }
+
+    /**
      * TemplatesSet instance factory.
      *
      * @param array ...$arguments
@@ -66,19 +80,5 @@ class TemplateSetTest extends AbstractTestCase
     protected function getInvalidTemplatesSetsPath()
     {
         return __DIR__ . '/../stubs/sets/invalid-set';
-    }
-
-    /**
-     * Test 'all()' method.
-     *
-     * @return void
-     */
-    public function testAllMethod()
-    {
-        $this->assertNotEmpty($all = $this->instance->all());
-
-        foreach ($all = $this->instance->all() as $template) {
-            $this->assertInstanceOf(Template::class, $template);
-        }
     }
 }

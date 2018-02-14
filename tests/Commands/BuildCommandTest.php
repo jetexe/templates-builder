@@ -2,23 +2,15 @@
 
 namespace Tarampampam\TemplatesBuilder\Tests\Commands;
 
+use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Console\Input\StringInput;
 use Symfony\Component\Console\Output\StreamOutput;
-use Symfony\Component\Filesystem\Filesystem;
 
 /**
  * Class BuildCommandTest.
  */
 class BuildCommandTest extends AbstractCommandTestCase
 {
-    /**
-     * {@inheritdoc}
-     */
-    protected function getCommandName()
-    {
-        return 'build';
-    }
-
     public function testCommandExecution()
     {
         $filesystem = new Filesystem;
@@ -36,5 +28,13 @@ class BuildCommandTest extends AbstractCommandTestCase
         $output = $this->streamIntoString($fp);
         $this->assertFileExists($readme_file = $dir_path . '/README.md');
         $this->assertContains('Example:', $readme_content = file_get_contents($readme_file));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getCommandName()
+    {
+        return 'build';
     }
 }

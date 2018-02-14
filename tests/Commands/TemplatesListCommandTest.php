@@ -11,14 +11,6 @@ use Tarampampam\TemplatesBuilder\Templates\Template;
  */
 class TemplatesListCommandTest extends AbstractCommandTestCase
 {
-    /**
-     * {@inheritdoc}
-     */
-    protected function getCommandName()
-    {
-        return 'templates';
-    }
-
     public function testCommandExecution()
     {
         $this->app->setAutoExit(false);
@@ -35,5 +27,13 @@ class TemplatesListCommandTest extends AbstractCommandTestCase
         foreach ($names as $name) {
             $this->assertContains($name, $output);
         }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getCommandName()
+    {
+        return 'templates';
     }
 }

@@ -2,9 +2,9 @@
 
 namespace Tarampampam\TemplatesBuilder\Tests\Commands;
 
+use Tarampampam\TemplatesBuilder\Builder;
 use Symfony\Component\Console\Input\StringInput;
 use Symfony\Component\Console\Output\StreamOutput;
-use Tarampampam\TemplatesBuilder\Builder;
 use Tarampampam\TemplatesBuilder\Tests\AbstractTestCase;
 
 /**
@@ -35,6 +35,19 @@ abstract class AbstractCommandTestCase extends AbstractTestCase
         unset($this->app);
 
         parent::tearDown();
+    }
+
+    /**
+     * Test command execution with '--help' option.
+     *
+     * @return void
+     */
+    public function testSimpleCommandExecution()
+    {
+        $output = $this->executeCommandAndGetOutput(sprintf('%s --help', $command = $this->getCommandName()));
+
+        $this->assertContains($output, $output);
+        $this->assertContains('Help:', $output);
     }
 
     /**
@@ -76,18 +89,5 @@ abstract class AbstractCommandTestCase extends AbstractTestCase
         $app->run($input = new StringInput($command_signature), $output = new StreamOutput($fp = tmpfile()));
 
         return $this->streamIntoString($fp);
-    }
-
-    /**
-     * Test command execution with '--help' option.
-     *
-     * @return void
-     */
-    public function testSimpleCommandExecution()
-    {
-        $output = $this->executeCommandAndGetOutput(sprintf('%s --help', $command = $this->getCommandName()));
-
-        $this->assertContains($output, $output);
-        $this->assertContains('Help:', $output);
     }
 }
