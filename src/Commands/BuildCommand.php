@@ -27,6 +27,11 @@ class BuildCommand extends AbstractCommand
     const DEFAULT_REPLACES_EXCLUDES = ['/.git/'];
 
     /**
+     * Default stub filename postfix (will be removed from filename on building).
+     */
+    const STUB_FILENAME_POSTFIX = '.tpl-stub';
+
+    /**
      * {@inheritdoc}
      */
     protected function getCommandName(): string
@@ -172,6 +177,14 @@ class BuildCommand extends AbstractCommand
             $target_path
         ));
         $this->filesystem->mirror($template_sources, $target_path, null, ['override' => true]);
+
+        // Rename template stub files
+        $postfix_length = mb_strlen(static::STUB_FILENAME_POSTFIX);
+        foreach ($this->getFilesNamesRecursively($target_path) as $filename) {
+            if (mb_substr($filename, -$postfix_length) === static::STUB_FILENAME_POSTFIX) {
+                $this->filesystem->rename($filename, mb_substr($filename, 0, -$postfix_length));
+            }
+        }
 
         return true;
     }

@@ -131,6 +131,8 @@ $ ~/.composer/vendor/bin/templates-builder b /path/to/target example-template
 $ templates-builder build /path/to/target example-template
 ```
 
+> Если в директории шаблона находятся файлы, чьи имена заканчивается на `.tpl-stub` (например - `.gitignote.tpl-stub`), то при его разворачивании они автоматически будут переименованы в имена без данного окончания (то есть `.gitignote.tpl-stub` станет `.gitignote`).
+
 ### Тестирование
 
 Для тестирования данного пакета используется фреймворк `phpunit`. Для запуска тестов выполните в терминале:
