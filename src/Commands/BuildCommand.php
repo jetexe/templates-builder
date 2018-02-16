@@ -87,7 +87,7 @@ class BuildCommand extends AbstractCommand
      *
      * @throws Exception
      *
-     * @return int|null
+     * @return int|null|bool
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {

@@ -26,7 +26,7 @@ class TemplatesSet
     /**
      * Templates constructor.
      *
-     * @param string[] $templates_paths
+     * @param string[]|array $templates_paths
      *
      * @throws Exception
      */

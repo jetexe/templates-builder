@@ -113,7 +113,7 @@ class Template
     /**
      * Get template sources directory path.
      *
-     * @return bool|string
+     * @return string
      */
     public function getTemplateSourcesPath()
     {
