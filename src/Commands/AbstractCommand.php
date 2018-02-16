@@ -2,6 +2,7 @@
 
 namespace Tarampampam\TemplatesBuilder\Commands;
 
+use Symfony\Component\Console\Application;
 use Tarampampam\TemplatesBuilder\Builder;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Console\Command\Command;
@@ -36,7 +37,7 @@ abstract class AbstractCommand extends Command
     /**
      * {@inheritdoc}
      *
-     * @return Builder
+     * @return Builder|Application
      */
     public function getApplication()
     {

@@ -64,6 +64,7 @@ class BuildCommand extends AbstractCommand
      *
      * @param Template[]|null $templates
      *
+     * @throws \LogicException
      * @return string[]array
      */
     protected function getAllTemplatesNames($templates = null)
@@ -112,9 +113,9 @@ class BuildCommand extends AbstractCommand
             ));
         }
         $output->writeln(
-                sprintf('<comment>Template name: %s</comment>', $passed_template_name),
-                OutputInterface::VERBOSITY_VERBOSE
-            );
+            sprintf('<comment>Template name: %s</comment>', $passed_template_name),
+            OutputInterface::VERBOSITY_VERBOSE
+        );
 
         foreach ($templates as $template) {
             if ($template->getName() === $passed_template_name) {
@@ -160,7 +161,8 @@ class BuildCommand extends AbstractCommand
             ));
         } else {
             $question = new ConfirmationQuestion(
-                sprintf('Target directory "%s" already exists. Use it anyway?', $target_path), true
+                sprintf('Target directory "%s" already exists. Use it anyway?', $target_path),
+                true
             );
 
             if (! $this->question_helper->ask($input, $output, $question)) {

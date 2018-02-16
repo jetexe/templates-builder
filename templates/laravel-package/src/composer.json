@@ -37,9 +37,6 @@
     "config": {
         "sort-packages": true
     },
-    "conflict": {
-        "hhvm": "*"
-    },
     "scripts": {
         "test": "./vendor/bin/phpunit --no-coverage"
     },

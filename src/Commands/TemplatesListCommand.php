@@ -34,6 +34,7 @@ class TemplatesListCommand extends AbstractCommand
      * @param InputInterface  $input
      * @param OutputInterface $output
      *
+     * @throws \LogicException
      * @return int|void|null
      */
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -55,7 +56,8 @@ class TemplatesListCommand extends AbstractCommand
                 ));
 
                 $output->writeln(sprintf(
-                    '    Location: <comment>%s</comment>', $template->getTemplatePath()
+                    '    Location: <comment>%s</comment>',
+                    $template->getTemplatePath()
                 ), OutputInterface::VERBOSITY_VERBOSE);
             }
         } else {
