@@ -65,6 +65,7 @@ class BuildCommand extends AbstractCommand
      * @param Template[]|null $templates
      *
      * @throws \LogicException
+     *
      * @return string[]array
      */
     protected function getAllTemplatesNames($templates = null)

@@ -35,6 +35,7 @@ class TemplatesListCommand extends AbstractCommand
      * @param OutputInterface $output
      *
      * @throws \LogicException
+     *
      * @return int|void|null
      */
     protected function execute(InputInterface $input, OutputInterface $output)

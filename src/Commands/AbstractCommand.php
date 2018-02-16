@@ -2,8 +2,8 @@
 
 namespace Tarampampam\TemplatesBuilder\Commands;
 
-use Symfony\Component\Console\Application;
 use Tarampampam\TemplatesBuilder\Builder;
+use Symfony\Component\Console\Application;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\SymfonyQuestionHelper;

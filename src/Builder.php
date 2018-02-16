@@ -2,15 +2,15 @@
 
 namespace Tarampampam\TemplatesBuilder;
 
-use Symfony\Component\Console\Exception\InvalidArgumentException;
-use Symfony\Component\Console\Exception\LogicException;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Exception\LogicException;
 use Tarampampam\TemplatesBuilder\Commands\BuildCommand;
 use Tarampampam\TemplatesBuilder\Templates\TemplatesSet;
 use Tarampampam\TemplatesBuilder\Commands\TemplatesListCommand;
+use Symfony\Component\Console\Exception\InvalidArgumentException;
 
 /**
  * Class Builder.
@@ -124,6 +124,7 @@ class Builder extends Application
      * Bootstrap the application.
      *
      * @throws LogicException
+     *
      * @return void
      */
     public function bootstrap()
