@@ -12,6 +12,20 @@ use Illuminate\Support\ServiceProvider;
 class LaravelPackageServiceProvider extends ServiceProvider
 {
     /**
+     * Indicates if loading of the provider is deferred.
+     *
+     * @var bool
+     */
+    protected $defer = false;
+
+    /**
+     * Boot service provider.
+     */
+    public function boot()
+    {
+        //
+    }
+    /**
      * Register service provider.
      */
     public function register()

@@ -13,7 +13,7 @@ abstract class AbstractTestCase extends BaseTestCase
     use CreatesApplicationTrait;
 
     /**
-     * Проверяет, что элемент является массивом.
+     * Assert that value is array.
      *
      * @param $value
      *
@@ -25,7 +25,7 @@ abstract class AbstractTestCase extends BaseTestCase
     }
 
     /**
-     * Проверяет, что элемент является не пустой строкой.
+     * Assert that value is'n empty string.
      *
      * @param $value
      *
@@ -38,7 +38,7 @@ abstract class AbstractTestCase extends BaseTestCase
     }
 
     /**
-     * Проверяет, что элемент является строкой.
+     * Assert that value is string.
      *
      * @param $value
      *
