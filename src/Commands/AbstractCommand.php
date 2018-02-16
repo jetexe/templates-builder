@@ -37,7 +37,7 @@ abstract class AbstractCommand extends Command
     /**
      * {@inheritdoc}
      *
-     * @return Builder|Application
+     * @return Builder
      */
     public function getApplication()
     {

@@ -40,6 +40,13 @@
     "scripts": {
         "test": "./vendor/bin/phpunit --no-coverage"
     },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "{%root_namespace%}\\{%package_namespace%}\\LaravelPackageServiceProvider"
+            ]
+        }
+    },
     "support": {
         "issues": "https://github.com/{%org_name%}/{%repo_name%}/issues",
         "source": "https://github.com/{%org_name%}/{%repo_name%}"

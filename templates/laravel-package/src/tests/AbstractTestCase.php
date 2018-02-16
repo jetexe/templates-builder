@@ -2,14 +2,16 @@
 
 namespace {%root_namespace%}\{%package_namespace%}\Tests;
 
-use PHPUnit\Framework\TestCase;
 use PHPUnit\Framework\AssertionFailedError;
+use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 
 /**
  * Class AbstractTestCase.
  */
-abstract class AbstractTestCase extends TestCase
+abstract class AbstractTestCase extends BaseTestCase
 {
+    use CreatesApplicationTrait;
+
     /**
      * Проверяет, что элемент является массивом.
      *
